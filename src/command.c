@@ -24,13 +24,15 @@ Command commands[] = {
     {"Request measurement", 0x07, request_measure},
     {"Request selftest", 0x06, request_selftest},
     {"Reset", 0x0F, util_command},
-    {"Restart", 0x0E, util_command}
+    {"Restart", 0x0E, util_command},
+    {"Save", 0xAA, util_command},
+    {"Stop", 0xBB, util_command}
 };
 
 void gen_command(int* command_data) {
     printf("Select a command:\n");
-    for (int i = 0; i < 6; i++) printf("[%d]. %s\n", i, commands[i].name);
-    int command_key = ask_int("Choose command [0-5]: ", 0, 6);
+    for (int i = 0; i < 8; i++) printf("[%d]. %s\n", i, commands[i].name);
+    int command_key = ask_int("Choose command [0-5]: ", 0, 8);
     Command command = commands[command_key];
     command_data[0] = command.code;
     command_data[1] = ask_int("Command Id [0-255]:", 0, 255);
